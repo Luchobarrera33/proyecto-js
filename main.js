@@ -1,4 +1,4 @@
-const prestamos = [];
+let prestamos = JSON.parse(localStorage.getItem('prestamos')) || [];
 
 function calcularPrestamo(monto, tasa, plazo) {
     let cuota = monto * (tasa / 1200) / (1 - (1 + tasa / 1200) ** (-plazo));
@@ -17,16 +17,20 @@ function imprimirHistorial() {
     });
 }
 
-let continuar = true;
+const montoInput = document.getElementById('monto');
+const tasaInput = document.getElementById('tasa');
+const plazoInput = document.getElementById('plazo');
+const calcularButton = document.getElementById('calcular');
+const resultadoDiv = document.getElementById('resultado');
 
-do {
-    let monto = parseFloat(prompt("Ingrese el monto del préstamo"));
-    let tasa = parseFloat(prompt("Ingrese la tasa de interés anual en porcentaje"));
-    let plazo = parseInt(prompt("Ingrese el plazo del préstamo en meses"));
+calcularButton.addEventListener('click', () => {
+    let monto = parseFloat(montoInput.value);
+    let tasa = parseFloat(tasaInput.value);
+    let plazo = parseInt(plazoInput.value);
 
     if (monto > 0 && tasa > 0 && plazo > 0) {
         let cuota = calcularPrestamo(monto, tasa, plazo);
-        alert("La cuota mensual es de " + cuota.toFixed(2));
+        resultadoDiv.textContent = "La cuota mensual es de $" + cuota.toFixed(2);
 
         const prestamo = {
             monto: monto,
@@ -36,15 +40,11 @@ do {
         };
 
         prestamos.push(prestamo);
+        localStorage.setItem('prestamos', JSON.stringify(prestamos));
+        imprimirHistorial();
     } else {
-        alert("Por favor ingrese valores válidos");
+        resultadoDiv.textContent = "Por favor ingrese valores válidos";
     }
+});
 
-    continuar = confirm("¿Quiere realizar otro cálculo?");
-} while (continuar);
-
-//imprime historial al cancelar
 imprimirHistorial();
-
-
-

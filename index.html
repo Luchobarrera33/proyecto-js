@@ -9,6 +9,20 @@
 <body>
     <h1>Calculadora de Préstamos</h1>
     <div>
+        <label for="monto">Monto del préstamo:</label>
+        <input type="number" id="monto">
+    </div>
+    <div>
+        <label for="tasa">Tasa de interés anual en porcentaje:</label>
+        <input type="number" id="tasa">
+    </div>
+    <div>
+        <label for="plazo">Plazo del préstamo en meses:</label>
+        <input type="number" id="plazo">
+    </div>
+    <button id="calcular">Calcular cuota mensual</button>
+    <div id="resultado"></div>
+    <div>
         <label for="historial">Historial de Préstamos:</label>
         <textarea id="historial" rows="10" cols="50"></textarea>
     </div>
