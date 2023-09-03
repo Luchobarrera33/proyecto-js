@@ -48,3 +48,11 @@ calcularButton.addEventListener('click', () => {
 });
 
 imprimirHistorial();
+
+const borrarButton = document.getElementById('borrar');
+
+borrarButton.addEventListener('click', () => {
+    prestamos = [];
+    localStorage.removeItem('prestamos');
+    imprimirHistorial();
+});
