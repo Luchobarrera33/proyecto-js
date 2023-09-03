@@ -46,3 +46,10 @@ button:hover {
     font-weight: bold;
     margin: 20px;
 }
+
+@media (min-width: 500px) {
+    div {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+}
